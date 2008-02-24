@@ -18,7 +18,8 @@
 
      _You can find more information on creating your own Hibernate session filter here: [http://www.hibernate.org/43.html]. However, for your convenience, there is a Hibernate servlet filter in net.digitalprimates.persistence.hibernate.utils.filters package._
     
-    Sample filter configuration in web.xml:{{{
+    Sample filter configuration in web.xml:
+{{{
     <filter>
         <filter-name>hibernateSessionFilter</filter-name>
         <filter-class>net.digitalprimates.persistence.hibernate.utils.filters.HibernateSessionServletFilter</filter-class>
@@ -32,7 +33,8 @@
 
 
   * Modify your BlazeDS remote-config.xml to add our custom adapter and your <destination>(s)
-    * Add the following Adapter:{{{
+    * Add the following Adapter:
+{{{
     <adapters>
         <adapter-definition id="hibernate-object" class="net.digitalprimates.persistence.hibernate.HibernateAdapter" default="true">
         	<properties>
