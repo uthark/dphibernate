@@ -6,9 +6,10 @@
 
 = Downloads =
 
-  # Download the dpHibernateX.X.X.jar
-    * Place the downloaded jar into your BlazeDS `<BlazeDS>WEB-INF\lib` folder.
-  # Download the dpHibernateX.X.X.swc
+  * Download the dpHibernateX.X.X.jar
+    * Place the downloaded jar into your  `<BlazeDS>WEB-INF\lib`  folder.
+  
+  * Download the dpHibernateX.X.X.swc
     * Add this file to your Flex3 Project
 
 = Configuration Changes =
