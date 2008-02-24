@@ -4,6 +4,7 @@
 
 
 = Downloads =
+
   * Download the dpHibernateX.X.X.jar
     * Place the downloaded jar into your BlazeDS "WEB-INF\lib" folder.
 
