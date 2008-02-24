@@ -6,9 +6,9 @@ dpHibernate is designed to quietly work behind the scenes and make everything as
 
 In order for dpHibernate to be able to monitor the state of your objects and trigger the lazy loading as objects are touched. Two things need to be done to every value object in Action Script.
 
-  # Add the 'Managed' meta data flag to each class
-  # Every value object, returned from Hibernate, that needs to be monitored and managed by dpHibernate needs to extend the 'HibernateBean' ('net.digitalprimates.persistence.hibernate.HibernateBean') class
-    * Alternativly every value object can implement the 'IHibernateBean' interface instead. ('net.digitalprimates.persistence.hibernate.HibernateBean')
+  # Add the `Managed` meta data flag to each class
+  # Every value object, returned from Hibernate, that needs to be monitored and managed by dpHibernate needs to extend the `HibernateBean` (`net.digitalprimates.persistence.hibernate.HibernateBean`) class
+    * Alternativly every value object can implement the `IHibernateBean` interface instead. (`net.digitalprimates.persistence.hibernate.HibernateBean`)
 
 {{{
 package model.beans
@@ -28,3 +28,11 @@ package model.beans
 	}
 }
 }}}
+
+
+= Java = 
+
+dpHibernate works by passing either the real object or a proxy back and forth with flex. For this reason the POJO's on the Java side, which will be returned by hibernate, need to be able to live as both a proxy and the full object. 
+
+  * Extend the POJO classes with the: `HibernateProxy` (`net.digitalprimates.persistence.hibernate.proxy.HibernateProxy`)
+    * Alternatively you can implement the interface: `IHibernateProxy` (`net.digitalprimates.persistence.hibernate.proxy.IHibernateProxy`)
