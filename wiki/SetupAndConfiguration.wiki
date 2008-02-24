@@ -13,6 +13,7 @@
 = Configuration Changes =
 
   * Modify the <BlazeDS>\WEB-INF\web.xml
+
     dpHibernate requires having access to an open session while processing the incoming arguments and outgoing results. Which means that we need to have an open session throughout the life of the request. The easiest way to do this is with a customer Servlet Filter wrapped around the BlazeDS MessageBrokerServlet.
 
      _You can find more information on creating your own Hibernate session filter here: [http://www.hibernate.org/43.html]. However, for your convenience, there is a Hibernate servlet filter in net.digitalprimates.persistence.hibernate.utils.filters package._
