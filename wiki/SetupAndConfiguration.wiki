@@ -53,4 +53,6 @@
 
      _Note: You will need to define the path to a java file that the adapter can use to get access to the current session that was open in the servlet filter, defined above._
 
+_Note:  Do not depend on "net.digitalprimates.persistence.hibernate.utils.HibernateUtil". If you are using Spring to manage your hibernate sessions, you cannot use this.
+
     * Create your custom hibernate destination, just like you would to any other Java class. 
