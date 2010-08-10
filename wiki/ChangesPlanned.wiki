@@ -28,3 +28,7 @@ The main configuration block has changed.
  * `loadMethod` and `saveMethod` are now optional.  If ommitted, the values default to loadBean and saveBean respectively.
  * Added the `loadBatchMethod` property, which specifies the method name used for batch loaded calls.  If ommitted, it defaults to `loadProxyBatch`
  * Added the `pageSize` property, which configures pagination on the adapter.  If  * ommitted, defaults to -1 - disabled.
+
+==Misc==
+ * The default implementation of IHibernateProxy is now HibernateBean.as / HibernateBean.java.  Previously there were various approaches present in the codebase with mixed names.  Old approaches have been deleted.
+
