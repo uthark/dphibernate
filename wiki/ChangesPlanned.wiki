@@ -1,6 +1,6 @@
 #summary Discussion around breaking changes in 2.0
 #labels Phase-Support
-
+*This page is a WIP / Brain dump of changes as they're committed to the codebase.  It will be cleaned up to coherent documentation shortly*
 = Introduction =
 
 2.0 is due for release shortly.  It involves a number of breaking changes, and changes to how dpHibernate is configured.
@@ -26,3 +26,5 @@ The main configuration block has changed.
    * Alternatively, write your own.  It must implement `org.dphibernate.serialization.ISerializerFactory`
  * The `sessionFactory` element has been dropped.  SessionFactories are now provided by the SerializerFactory.  In the case of Spring, the sessionFactory is now injected by the container, rather than being explicitly fetched
  * `loadMethod` and `saveMethod` are now optional.  If ommitted, the values default to loadBean and saveBean respectively.
+ * Added the `loadBatchMethod` property, which specifies the method name used for batch loaded calls.  If ommitted, it defaults to `loadProxyBatch`
+ * Added the `pageSize` property, which configures pagination on the adapter.  If  * ommitted, defaults to -1 - disabled.
