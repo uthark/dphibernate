@@ -1,0 +1,28 @@
+#summary Discussion around breaking changes in 2.0
+#labels Phase-Support
+
+= Introduction =
+
+2.0 is due for release shortly.  It involves a number of breaking changes, and changes to how dpHibernate is configured.
+
+We will be seeking community feedback on these changes before a final release, so content listed here is subject to change.
+
+If you have concerns about some of these changes, please email the mailing list:
+dphibernate@googlegroups.com
+
+
+= Details =
+==General==
+All classes have been moved from net.digitalprimates.* into a new namespace: org.dphibernate.*
+
+This is a breaking change.  You need to update any references throughout the code to the new  namespace.  
+==Configuration==
+*Renamed*: net.digitalprimates.persistence.hibernate.HibernateAdapter becomes org.dphibernate.adapters.RemotingAdapter
+
+The main configuration block has changed.
+ * You now must decalre a SerializerFactory.  This is the only mandatory field.
+   * If running in Spring, use `org.dphibernate.serialization.SpringContextSerializerFactory`
+   * If running outside of Spring, use `org.dphibernate.serialization.SimpleSerializationFactory`
+   * Alternatively, write your own.  It must implement `org.dphibernate.serialization.ISerializerFactory`
+ * The `sessionFactory` element has been dropped.  SessionFactories are now provided by the SerializerFactory.  In the case of Spring, the sessionFactory is now injected by the container, rather than being explicitly fetched
+ * `loadMethod` and `saveMethod` are now optional.  If ommitted, the values default to loadBean and saveBean respectively.
