@@ -42,6 +42,15 @@ public function onApplicationInitalize():void
 }
 }}}
 
+
+The strategy for resolving the HibernateRPC used is now configurable, should you wish to implement your own.  You can define this by setting `HibernateManaged.hibernateRPCProvider` to an instance of `IHibernateROProvider`.
+
+Currently only `DefaultHibernateRPCProvider` is shipped (which uses the `HibernateManaged.defaultHibernateService` property.
+
+Before 2.0, we plan to include:
+ * `BeanResolvedHibernateRPCProvider` which uses the old approach of mapping incoming beans to the service they arrived on.
+ * `AnnotationHibernateRPCProvider` which allows you to specify a destination using annotations on your model.
+
 The main configuration block has changed.
  * You now must decalre a SerializerFactory.  This is the only mandatory field.
    * If running in Spring, use `org.dphibernate.serialization.SpringContextSerializerFactory`
