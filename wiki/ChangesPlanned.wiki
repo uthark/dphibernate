@@ -19,6 +19,29 @@ This is a breaking change.  You need to update any references throughout the cod
 ==Configuration==
 *Renamed*: net.digitalprimates.persistence.hibernate.HibernateAdapter becomes org.dphibernate.adapters.RemotingAdapter
 
+===DefaultHibernateService===
+You must now initalize a defaultHibernateService to an `IHibernateRPC` instance upon initlaization of the application.
+
+Previously, dpHibernate used reflection at runtime to associate all incoming entities with the service they were received from.  This approach has been replaced by the `defaultHibernateService` as the preferred approach for mapping entities with a service.
+
+The plan is to re-introduce support for reflection based mapping at runtime before the 2.0 release.  However, it is not currently supported.
+
+Example:
+{{{
+<dphibernate:HibernateRemoteObject id="dataAccessService" destination="dataAccessService" channelSet="{channelSet}" bufferProxyLoadRequests="true" />
+
+public function onApplicationInitalize():void
+{
+	// Setup a default service.
+	// This is used by beans to perform dpHibernate operations (Save / Load, etc)
+	// where a service has not yet been assigned to the bean.
+	// Note - services are generally assigned to beans when they are
+	// sent to the client from a service call.
+	HibernateManaged.defaultHibernateService = this.dataAccessService;
+
+}
+}}}
+
 The main configuration block has changed.
  * You now must decalre a SerializerFactory.  This is the only mandatory field.
    * If running in Spring, use `org.dphibernate.serialization.SpringContextSerializerFactory`
@@ -31,4 +54,3 @@ The main configuration block has changed.
 
 ==Misc==
  * The default implementation of IHibernateProxy is now HibernateBean.as / HibernateBean.java.  Previously there were various approaches present in the codebase with mixed names.  Old approaches have been deleted.
-
