@@ -1,6 +1,5 @@
 #summary Discussion around breaking changes in 2.0
 #labels Phase-Support
-*This page is a WIP / Brain dump of changes as they're committed to the codebase.  It will be cleaned up to coherent documentation shortly*
 = Introduction =
 
 2.0 is due for release shortly.  It involves a number of breaking changes, and changes to how dpHibernate is configured.
@@ -10,6 +9,10 @@ We will be seeking community feedback on these changes before a final release, s
 If you have concerns about some of these changes, please email the mailing list:
 dphibernate@googlegroups.com
 
+==RC1 Available==
+dpHibernate 2.0-RC1 is now available.
+
+http://code.google.com/p/dphibernate/downloads/detail?name=2.0-RC1.zip
 
 = Details =
 ==General==
