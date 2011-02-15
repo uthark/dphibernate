@@ -1,0 +1,14 @@
+#summary Summary of the sample projects available
+#labels Featured
+
+= Introduction =
+
+There a two working sample projects that demo dpHibernate with Spring.
+
+For a simple Lazy loading demo, check out the demo project here:
+[http://code.google.com/p/dphibernate/source/browse/#svn%2Ftrunk%2Fsamples%2FlazyLoadingWithSpring Lazy loading with Spring]
+
+For a more complete demo project, that shows off full CRUD functionality, batched loading and message interceptors, check out the [http://code.google.com/p/lazyoverflow/ Lazy Overflow] project.
+
+
+*Note : All other demo projects pertain to the 1.x codebase, and will not work with 2.x code*
