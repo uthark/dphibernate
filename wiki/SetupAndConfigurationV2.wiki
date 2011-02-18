@@ -18,7 +18,7 @@ If implementing IHibernateProxy yourself, you must make sure that `getProxyKey()
 == Server side services ==
 dpHibernate provides various server side configurations.  Depending on which features you wish to activate, you need to expose different services
 
-||*Feature*||*Required Service Interface*||*Shipped Default*||
+|| *Feature* || *Required Service Interface* || *Shipped Default* ||
 ||Lazy loading||IProxyLoadService||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/ProxyLoadService.java ProxyLoadService]||
 ||Batched lazy loading||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/IProxyBatchLoader.java IProxyBatchLoader]||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/ProxyBatchLoader.java ProxyBatchLoader]||
 ||Lazy loading + Batched Loading (_recommended minimum_)||ILazyLoadService + IProxyBatchLoader||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/LazyLoadService.java LazyLoadService]||
@@ -26,9 +26,53 @@ dpHibernate provides various server side configurations.  Depending on which fea
 ||All the above (_recommended configuration_)|| ||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/DataAccessService.java DataAccessService]||
 
  * Note - Spring based versions of the default services are also provided, if your configuration uses Spring.  Services are provided both for [http://code.google.com/p/dphibernate/source/browse/branches/2.0/#2.0%2Fspring-extensions-2.5.6%2Fsrc%2Forg%2Fdphibernate%2Fservices Spring 2.5.6] and [http://code.google.com/p/dphibernate/source/browse/branches/2.0/#2.0%2Fspring-extensions-3.0%2Fsrc%2Forg%2Fdphibernate%2Fservices Spring 3.x]
-= Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+A typical server configuration for lazy loading only can be found [http://code.google.com/p/dphibernate/source/browse/#svn%2Ftrunk%2Fsamples%2FlazyLoadingWithSpring here], or with both lazy loading and entity persistence [http://code.google.com/p/lazyoverflow/ here].
+
+== Server configuration ==
+Once your services extend / implement the appropraite interfaces, you need to configure them.
+
+The spring configuration is currently somewhat verbose.  This is an issue currently being investigated.
+
+A fully commented 
+An example spring configuration is shown here:
+
+{{{
+        <bean id="dpHibernateRemotingAdapter"
+                class="org.springframework.flex.core.ManageableComponentFactoryBean">
+                <constructor-arg value="org.dphibernate.adapters.RemotingAdapter" />
+                <property name="properties">
+                        <value>
+                                {"dpHibernate" :
+                                {
+                                "serializerFactory" : "org.dphibernate.serialization.SpringContextSerializerFactory"
+                                }
+                                }
+        </value>
+                </property>
+        </bean>
+        <!--
+                Provides a basic service for lazy loading operations through
+                dpHibernate. It's also exported as a remoting destination, which makes
+                it accessible to flex clients
+        -->
+        <bean id="dataAccessService" class="org.dphibernate.services.SpringLazyLoadService"
+                autowire="constructor">
+                <flex:remoting-destination />
+        </bean>
+        <!--
+                The main serializer. Converts outbound POJO's to ASObjects with
+                dpHibernate proxies for lazy loading. Required
+        -->
+        <bean id="dpHibernateSerializer" class="org.dphibernate.serialization.HibernateSerializer"
+                scope="prototype">
+                <property name="pageSize" value="10" />
+        </bean>
+        <bean id="dpHibernateDeserializer" class="org.dphibernate.serialization.HibernateDeserializer"
+                scope="prototype" />
+
+}}}
+
+See also [http://code.google.com/p/dphibernate/source/browse/trunk/samples/lazyLoadingWithSpring/WebContent/WEB-INF/flexContext.xml this example]
+
+This is the minimum configuration.  For a more complete example, see [http://code.google.com/p/lazyoverflow/source/browse/trunk/WebContent/WEB-INF/dpHibernateContext.xml here].
