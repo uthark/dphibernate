@@ -24,6 +24,8 @@ dpHibernate provides various server side configurations.  Depending on which fea
 ||Lazy loading + Batched Loading (_recommended minimum_)||ILazyLoadService + IProxyBatchLoader||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/LazyLoadService.java LazyLoadService]||
 ||Update / Delete entities||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/IProxyUpdateService.java IProxyUpdateService]||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/ProxyUpdaterService.java ProxyUpdaterService]||
 ||All the above (_recommended configuration_)|| ||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/DataAccessService.java DataAccessService]||
+
+ * Note - Spring based versions of the default services are also provided, if your configuration uses Spring.  Services are provided both for [http://code.google.com/p/dphibernate/source/browse/branches/2.0/#2.0%2Fspring-extensions-2.5.6%2Fsrc%2Forg%2Fdphibernate%2Fservices Spring 2.5.6] and [http://code.google.com/p/dphibernate/source/browse/branches/2.0/#2.0%2Fspring-extensions-3.0%2Fsrc%2Forg%2Fdphibernate%2Fservices Spring 3.x]
 = Details =
 
 Add your content here.  Format your content with:
