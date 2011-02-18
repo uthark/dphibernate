@@ -1,11 +1,19 @@
 #summary Steps for getting going with dpHibernate
-
-= Introduction =
-
-Add your content here.
+#labels Featured
 
 == Client entity classes ==
 Client classes are required to either subclass [http://code.google.com/p/dphibernate/source/browse/branches/2.0/flexLibrary/flex-src/org/dphibernate/core/HibernateBean.as HibernateBean] or implement [http://code.google.com/p/dphibernate/source/browse/branches/2.0/flexLibrary/flex-src/org/dphibernate/core/IHibernateProxy.as IHibernateProxy].  A sample implementation of IHibernate proxy can be found [http://code.google.com/p/dphibernate/source/browse/trunk/samples/lazyLoadingWithSpring/flex/src/com/mangofactory/pepper/model/BaseEntity.as here].
+
+Additionally, client classes must be annotated with the `[Managed]` metatag.  Eg:
+
+{{{
+        [Managed]
+        [RemoteClass(alias="com.mangofactory.pepper.model.Post")]
+        public class Post extends BaseEntity
+        {
+           ...
+        }
+}}}
 
 == Server entity classes ==
 Similarly, your server-side Java classes must either subclass [http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/core/HibernateProxy.java HibernateProxy] or implement [http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/core/IHibernateProxy.java IHibernateProxy].
@@ -34,7 +42,6 @@ Once your services extend / implement the appropraite interfaces, you need to co
 
 The spring configuration is currently somewhat verbose.  This is an issue currently being investigated.
 
-A fully commented 
 An example spring configuration is shown here:
 
 {{{
@@ -75,4 +82,38 @@ An example spring configuration is shown here:
 
 See also [http://code.google.com/p/dphibernate/source/browse/trunk/samples/lazyLoadingWithSpring/WebContent/WEB-INF/flexContext.xml this example]
 
-This is the minimum configuration.  For a more complete example, see [http://code.google.com/p/lazyoverflow/source/browse/trunk/WebContent/WEB-INF/dpHibernateContext.xml here].
+This is the minimum configuration.  For a more complete example, see [http://code.google.com/p/lazyoverflow/source/browse/trunk/WebContent/WEB-INF/dpHibernateContext.xml here], or more detailed ConfigurationOptions.
+
+=Client configration=
+
+Client configuration is minimal.
+
+Any services you wish dpHibernate to provide paging support for should be declared as a `HibernateRemoteObject`, instead of a normal `RemoteObject`.
+
+For example:
+
+{{{
+<fx:Declarations>
+       <dphibernate:HibernateRemoteObject id="dataService"
+                   destination="dataService"
+                   bufferProxyLoadRequests="true"
+                   fault="faultHandler(event)"/>
+</fx:Declarations>
+}}}
+_Note: `bufferProxyLoadRequests` is optional, and is used to define if proxy loads should be buffered to improve performance.  See [http://martypitt.wordpress.com/2010/07/07/batch-loading-proxies-in-dphibernate/ this blog post] for more details._
+
+A `HibernateRemoteObject` can be used like any standard `mx:RemoteObject`, and configured to point to any destination on your server and invoke methods as per normal.  *Note: The destination of a HibernateRemoteObject does not need to be a dpHibernateService*.
+
+==Define DefaultHibernateService==
+Once your application is initialized, you are required to define the `defaultHibernateService`.  This is the service which calls to fetch lazy-loaded entities will be made over.  This destination MUST implement the appropriate interfaces, as defined above.
+
+Set up your service on initialization as follows:
+
+{{{
+public function onApplicationComplete():void
+{
+	HibernateManaged.defaultHibernateService = this.dataAccessService;
+}
+}}}
+
+That's it.  Now, any entities and collections lazy loaded by Hibernate will be lazily fetched / serialized by dpHibernate.
