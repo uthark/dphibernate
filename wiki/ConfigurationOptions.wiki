@@ -53,16 +53,3 @@ Note : It is possible to define a SerialzerFactory which returns multiple serial
 * Settings defined on a serializer take precedence
 * Settings defined on the remotingAdapter are applied to all serializers that don't define a custom setting
 * If neither is provided, pagination is disabled.
-
-
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
