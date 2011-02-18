@@ -12,3 +12,8 @@ For a more complete demo project, that shows off full CRUD functionality, batche
 
 
 *Note : All other demo projects pertain to the 1.x codebase, and will not work with 2.x code*
+
+= Other aritcles / reading =
+There's a series of blog posts available on dpHibernate over on [http://martypitt.wordpress.com/tag/dpHibernate/ Marty Pitt's blog]
+
+There's also a in-depth tutorial available on [http://ria.dzone.com/articles/lazy-loading-flex-blazeds-hibernate dZone]
