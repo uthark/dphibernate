@@ -15,6 +15,13 @@ A sample implementation of IHibernateProxy can be found [http://code.google.com/
 === IHibernateProxy.java implementation ===
 If implementing IHibernateProxy yourself, you must make sure that `getProxyKey()` returns your entities primary key.  Note - composite keys are not supported.
 
+== Server side services ==
+dpHibernate provides various server side configurations.  Depending on which features you wish to activate, you need to expose different services
+
+||Feature||Required Service Interface||Shipped Default||
+||Lazy loading||IProxyLoadService||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/ProxyLoadService.java ProxyLoadService]||
+||Batched lazy loading||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/IProxyBatchLoader.java IProxyBatchLoader]||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/ProxyBatchLoader.java ProxyBatchLoader]||
+||Lazy loading + Batched Loading (_recommended default_)||||[http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/services/LazyLoadService.java LazyLoadService]||
 
 = Details =
 
