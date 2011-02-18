@@ -1,0 +1,24 @@
+#summary Steps for getting going with dpHibernate
+
+= Introduction =
+
+Add your content here.
+
+== Client entity classes ==
+Client classes are required to either subclass [http://code.google.com/p/dphibernate/source/browse/branches/2.0/flexLibrary/flex-src/org/dphibernate/core/HibernateBean.as HibernateBean] or implement [http://code.google.com/p/dphibernate/source/browse/branches/2.0/flexLibrary/flex-src/org/dphibernate/core/IHibernateProxy.as IHibernateProxy].  A sample implementation of IHibernate proxy can be found [http://code.google.com/p/dphibernate/source/browse/trunk/samples/lazyLoadingWithSpring/flex/src/com/mangofactory/pepper/model/BaseEntity.as here].
+
+== Server entity classes ==
+Similarly, your server-side Java classes must either subclass [http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/core/HibernateProxy.java HibernateProxy] or implement [http://code.google.com/p/dphibernate/source/browse/branches/2.0/server-adapter/src/org/dphibernate/core/IHibernateProxy.java IHibernateProxy].
+
+A sample implementation of IHibernateProxy can be found [http://code.google.com/p/dphibernate/source/browse/trunk/samples/lazyLoadingWithSpring/java/src/com/mangofactory/pepper/model/BaseEntity.java here].
+
+=== IHibernateProxy.java implementation ===
+If implementing IHibernateProxy yourself, you must make sure that `getProxyKey()` returns your entities primary key.  Note - composite keys are not supported.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
