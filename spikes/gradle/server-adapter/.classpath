@@ -43,5 +43,6 @@
 	<classpathentry kind="lib" path="lib/jaxb-api-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/jaxb-impl-2.1.12.jar"/>
 	<classpathentry kind="lib" path="lib/hsqldb-2.0.0.jar"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
